@@ -19,6 +19,7 @@ def get_formatted_df(df):
     df.fillna(0, inplace=True)
     return df
 
+
 def bootstrap(df, B=5000):
     metrics_l = []
     for metric in df:
@@ -28,7 +29,7 @@ def bootstrap(df, B=5000):
     intervals = []
     for metric in metrics_l:
         local_means = []
-        for _ in range(5000):
+        for _ in range(B):
             x = np.random.choice(metric, size=len(metric), replace=True)
             local_means.append(x.mean())
         intervals.append(sms.DescrStatsW(local_means).tconfint_mean())
